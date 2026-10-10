@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexTech Studio - Tecnología, Celulares y Soporte en Colombia</title>
+    <style>
+        /* Reset y Variables Globales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #0f172a;
+            --secondary: #0284c7;
+            --accent: #38bdf8;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --success: #16a34a;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Banner Promocional Superior */
+        .top-bar {
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Encabezado y Navegación */
+        header {
+            background-color: var(--primary);
+            color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        .logo span {
+            color: #ffffff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Sección Hero */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
+                        url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
+        .btn {
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0369a1;
+        }
+
+        .btn-order {
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .btn-order:hover {
+            background-color: #0369a1;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Categorías */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .cat-btn {
+            background: #e2e8f0;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cat-btn:hover, .cat-btn.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        /* Rejilla de Productos */
+        .grid-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            background-color: #f1f5f9;
+        }
+
+        .card-content {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .badge {
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            width: fit-content;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .card-price {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .card-content button {
+            margin-top: auto;
+        }
+
+        /* Ventana Modal de Encargo */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #64748b;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-product-info {
+            background: #f1f5f9;
+            padding: 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-form label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: -0.5rem;
+        }
+
+        .modal-form input, .modal-form select, .modal-form textarea {
+            padding: 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            outline: none;
+            font-size: 0.95rem;
+        }
+
+        .modal-form input:focus, .modal-form select:focus, .modal-form textarea:focus {
+            border-color: var(--secondary);
+        }
+
+        /* Confirmación de Envío */
+        .alert-success {
+            display: none;
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* Sección de Servicios */
+        .services {
+            background-color: #cbd5e1;
+            padding: 3rem 1.5rem;
+            margin-top: 4rem;
+            border-radius: 10px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .service-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .service-box h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        /* Sección de Métodos de Pago */
+        .payment-methods {
+            margin-top: 4rem;
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            font-weight: bold;
+            color: #475569;
+        }
+
+        .payment-item {
+            background: #f1f5f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Sección de Testimonios */
+        .testimonials {
+            margin-top: 4rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* Sección de Preguntas Frecuentes */
+        .faq-section {
+            margin-top: 4rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+
+        .faq-item {
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.8rem;
+        }
+
+        .faq-item h4 {
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Sección de Contacto */
+        .contact-section {
+            margin-top: 4rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .contact-info p {
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--secondary);
+        }
+
+        /* Pie de página */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bar Superior Promocional -->
+    <div class="top-bar">
+        ⚡ ¡Envíos gratis a todo Colombia por compras superiores a $150.000 COP! ⚡
+    </div>
+
+    <!-- Navegación -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">NexTech<span>Studio</span></div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#catalogo">Catálogo</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#pagos">Pagos</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sección Principal (Hero) -->
+    <section id="inicio" class="hero">
+        <h1>Lo Último en Tecnología en Colombia</h1>
+        <p>Celulares homologados con garantía oficial, accesorios premium, servicio técnico en Yumbo y despachos a todo el país.</p>
+        <a href="#catalogo" class="btn">Ver Ofertas Disponibles</a>
+    </section>
+
+    <!-- Contenedor Principal -->
+    <main class="container">
+
+        <!-- Categorías -->
+        <div class="categories">
+            <span class="cat-btn active">Todos</span>
+            <span class="cat-btn">Celulares</span>
+            <span class="cat-btn">Audio</span>
+            <span class="cat-btn">Wearables</span>
+            <span class="cat-btn">Accesorios</span>
+        </div>
+
+        <!-- Catálogo de Productos -->
+        <section id="catalogo">
+            <h2 class="section-title">Productos Destacados</h2>
+            <p class="section-subtitle">Precios finales en pesos colombianos (COP)</p>
+            
+            <div class="grid-products">
+                
+                <!-- Producto 1: Precio ajustado más bajo -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=600&q=80" alt="Samsung Galaxy S24 Ultra">
+                    <div class="card-content">
+                        <span class="badge">Oferta Especial</span>
+                        <h3 class="card-title">Samsung Galaxy S24 Ultra 256GB</h3>
+                        <p class="card-price">$4.299.900 COP</p>
+                        <button class="btn-order" onclick="abrirEncargo('Samsung Galaxy S24 Ultra 256GB', '$4.299.900 COP')">📦 Encargar Dispositivo</button>
+                    </div>
+                </div>
+
+                <!-- Producto 2: MANTIENE SU PRECIO INTACTO -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80" alt="Apple iPhone 15 Pro Max">
+                    <div class="card-content">
+                        <span class="badge">Homologado CRC</span>
+                        <h3 class="card-title">Apple iPhone 15 Pro Max 256GB</h3>
+                        <p class="card-price">$5.899.000 COP</p>
+                        <button class="btn-order" onclick="abrirEncargo('Apple iPhone 15 Pro Max 256GB', '$5.899.000 COP')">📦 Encargar Dispositivo</button>
+                    </div>
+                </div>
+
+                <!-- Producto 3: Precio ajustado más bajo -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=600&q=80" alt="Xiaomi Redmi Note 13 Pro">
+                    <div class="card-content">
+                        <span class="badge">Más Vendido</span>
+                        <h3 class="card-title">Xiaomi Redmi Note 13 Pro+ 5G</h3>
+                        <p class="card-price">$1.199.900 COP</p>
+                        <button class="btn-order" onclick="abrirEncargo('Xiaomi Redmi Note 13 Pro+ 5G', '$1.199.900 COP')">📦 Encargar Dispositivo</button>
+                    </div>
+                </div>
+
+                <!-- Producto 4: Precio ajustado más bajo -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=600&q=80" alt="Audífonos Sony WH-1000XM5">
+                    <div class="card-content">
+                        <span class="badge">Audio Hi-Res</span>
+                        <h3 class="card-title">Audífonos Sony WH-1000XM5</h3>
+                        <p class="card-price">$890.000 COP</p>
+                        <button class="btn-order" onclick="abrirEncargo('Audífonos Sony WH-1000XM5', '$890.000 COP')">📦 Encargar Dispositivo</button>
+                    </div>
+                </div>
+
+                <!-- Producto 5: Precio ajustado más bajo -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80" alt="Smartwatch Huawei Watch GT 4">
+                    <div class="card-content">
+                        <span class="badge">Batería 14 días</span>
+                        <h3 class="card-title">Smartwatch Huawei Watch GT 4</h3>
+                        <p class="card-price">$549.900 COP</p>
+                        <button class="btn-order" onclick="abrirEncargo('Smartwatch Huawei Watch GT 4', '$549.900 COP')">📦 Encargar Dispositivo</button>
+                    </div>
+                </div>
+
+                <!-- Producto 6: Precio ajustado más bajo -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80" alt="Cargador Anker GaN 65W">
+                    <div class="card-content">
+                        <span class="badge">Carga Rápida</span>
+                        <h3 class="card-title">Cargador Anker GaN 65W USB-C</h3>
+                        <p class="card-price">$95.000 COP</p>
+                        <button class="btn-order" onclick="abrirEncargo('Cargador Anker GaN 65W USB-C', '$95.000 COP')">📦 Encargar Dispositivo</button>
+                    </div>
+                </div>
+
+                <!-- Producto 7: Precio ajustado más bajo -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80" alt="Laptop ASUS Vivobook">
+                    <div class="card-content">
+                        <span class="badge">Trabajo / Estudio</span>
+                        <h3 class="card-title">Portátil ASUS Vivobook 15 Core i5</h3>
+                        <p class="card-price">$1.699.000 COP</p>
+                        <button class="btn-order" onclick="abrirEncargo('Portátil ASUS Vivobook 15 Core i5', '$1.699.000 COP')">📦 Encargar Dispositivo</button>
+                    </div>
+                </div>
+
+                <!-- Producto 8: Precio ajustado más bajo -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=600&q=80" alt="Parlante Bluetooth JBL Flip 6">
+                    <div class="card-content">
+                        <span class="badge">Resistente al Agua</span>
+                        <h3 class="card-title">Parlante Bluetooth JBL Flip 6</h3>
+                        <p class="card-price">$340.000 COP</p>
+                        <button class="btn-order" onclick="abrirEncargo('Parlante Bluetooth JBL Flip 6', '$340.000 COP')">📦 Encargar Dispositivo</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Ventana Modal para Encargar Producto -->
+        <div id="modalEncargo" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="cerrarEncargo()">&times;</span>
+                <h3 class="modal-title">Formulario de Encargo Directo</h3>
+                <p style="margin-bottom: 0.8rem; color: #64748b; font-size: 0.9rem;">Diligencia tus datos para solicitar el dispositivo:</p>
+                
+                <div class="modal-product-info" id="productoSeleccionado">
+                    Producto: -
+                </div>
+
+                <form class="modal-form" id="formEncargo" onsubmit="enviarPedido(event)">
+                    <label for="nombreCliente">Nombre Completo:</label>
+                    <input type="text" id="nombreCliente" placeholder="Ej. Ashly Castro" required>
+
+                    <label for="telefonoCliente">Teléfono de Contacto:</label>
+                    <input type="tel" id="telefonoCliente" placeholder="Ej. 315 890 1234" required>
+
+                    <label for="ciudadCliente">Ciudad / Municipio:</label>
+                    <input type="text" id="ciudadCliente" placeholder="Ej. Yumbo, Valle del Cauca" required>
+
+                    <label for="pagoCliente">Método de Pago Preferido:</label>
+                    <select id="pagoCliente" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="Nequi">Nequi</option>
+                        <option value="Daviplata">Daviplata</option>
+                        <option value="Bancolombia">Transferencia Bancolombia / PSE</option>
+                        <option value="Contraentrega">Pago Contraentrega en Local</option>
+                    </select>
+
+                    <label for="notasCliente">Comentarios o Dirección de Envío:</label>
+                    <textarea id="notasCliente" rows="3" placeholder="Ingresa la dirección detallada o especificaciones de color"></textarea>
+
+                    <button type="submit" class="btn" style="margin-top: 0.5rem;">Confirmar Encargo</button>
+                </form>
+
+                <div id="mensajeConfirmacion" class="alert-success">
+                    ¡Pedido recibido con éxito! Nos comunicaremos a tu teléfono para confirmar el envío.
+                </div>
+            </div>
+        </div>
+
+        <!-- Servicios Especializados -->
+        <section id="servicios" class="services">
+            <h2 class="section-title">Servicio Técnico y Soporte</h2>
+            <p class="section-subtitle">Atención directa en nuestro laboratorio técnico</p>
+            <div class="services-grid">
+                <div class="service-box">
+                    <h3>Mantenimiento y Cambio de Pantalla</h3>
+                    <p>Instalación de repuestos homologados el mismo día con garantía escrita.</p>
+                </div>
+                <div class="service-box">
+                    <h3>Cambio de Batería Express</h3>
+                    <p>Diagnóstico de salud de batería e instalación en menos de 45 minutos.</p>
+                </div>
+                <div class="service-box">
+                    <h3>Registro IMEI en Colombia</h3>
+                    <p>Asesoría para el registro de tu equipo ante los operadores locales (Claro, Tigo, Movistar, WOM).</p>
+                </div>
+                <div class="service-box">
+                    <h3>Recuperación de Datos</h3>
+                    <p>Extracción de archivos de equipos mojados o golpeados.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Métodos de Pago en Colombia -->
+        <section id="pagos" class="payment-methods">
+            <h2 class="section-title">Medios de Pago Aceptados</h2>
+            <p>Paga de forma rápida y segura a través de plataformas locales:</p>
+            <div class="payment-icons">
+                <div class="payment-item">💳 Nequi</div>
+                <div class="payment-item">📱 Daviplata</div>
+                <div class="payment-item">🏦 Transferencia Bancolombia / PSE</div>
+                <div class="payment-item">💵 Pago Contraentrega (Local)</div>
+                <div class="payment-item">💳 Tarjetas Crédito / Débito</div>
+            </div>
+        </section>
+
+        <!-- Testimonios de Clientes -->
+        <section class="testimonials">
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <p class="section-subtitle">Opiniones verificadas en el Valle del Cauca</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p>"Encargué mi iPhone 15 Pro Max desde la página y me llegó el mismo día aquí a Yumbo. Excelente servicio."</p>
+                    <div class="testimonial-author">- Andrés Felipe M.</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Excelente servicio técnico. Le cambiaron la pantalla a mi Redmi y quedó como nuevo en un par de horas."</p>
+                    <div class="testimonial-author">- Camila O.</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Hice mi pedido directamente en la web, resolvieron mis dudas con la garantía y el envío llegó muy rápido."</p>
+                    <div class="testimonial-author">- Juan David H.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Preguntas Frecuentes (FAQ) -->
+        <section id="faq" class="faq-section">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            <div class="faq-item">
+                <h4>¿Los equipos vienen homologados en Colombia?</h4>
+                <p>Sí, absolutamente todos nuestros teléfonos están 100% homologados por la CRC para funcionar con cualquier operador del país.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Hacen envíos fuera de Valle del Cauca?</h4>
+                <p>Sí, realizamos despachos a nivel nacional a través de empresas de mensajería como Interrapidísimo, Servientrega y Coordinadora.</p>
+            </div>
+            <div class="faq-item">
+                <h4>¿Tienen garantía los productos?</h4>
+                <p>Todos nuestros productos cuentan con garantía directa de 3 a 12 meses según el fabricante y tipo de accesorio.</p>
+            </div>
+        </section>
+
+        <!-- Contacto y Ubicación -->
+        <section id="contacto" class="contact-section">
+            <div class="contact-info">
+                <h3>Visita nuestra sede física</h3>
+                <p><strong>Dirección:</strong> Carrera 5 # 8-24, Centro, Yumbo, Valle del Cauca</p>
+                <p><strong>Teléfono Fijo:</strong> +57 (602) 669 0000</p>
+                <p><strong>Línea Celular:</strong> +57 315 890 1234</p>
+                <p><strong>Horarios:</strong> Lunes a Sábado de 8:30 AM a 6:30 PM (Jornada Continua)</p>
+            </div>
+            <div class="contact-form">
+                <h3>Envíanos una consulta general</h3>
+                <form action="#" method="post" onsubmit="event.preventDefault(); alert('¡Gracias por contactarnos! Un asesor te responderá pronto.');">
+                    <input type="text" placeholder="Nombre completo" required>
+                    <input type="tel" placeholder="Número de Celular" required>
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <textarea rows="4" placeholder="¿En qué dispositivo o servicio estás interesado?" required></textarea>
+                    <button type="submit" class="btn">Enviar Consulta</button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 NexTech Studio - Yumbo, Valle del Cauca, Colombia. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Lógica JavaScript para manejo del encargo -->
+    <script>
+        function abrirEncargo(nombreProducto, precioProducto) {
+            document.getElementById('productoSeleccionado').innerText = 'Producto: ' + nombreProducto + ' (' + precioProducto + ')';
+            document.getElementById('modalEncargo').style.display = 'flex';
+            document.getElementById('mensajeConfirmacion').style.display = 'none';
+            document.getElementById('formEncargo').reset();
+            document.getElementById('formEncargo').style.display = 'flex';
+        }
+
+        function cerrarEncargo() {
+            document.getElementById('modalEncargo').style.display = 'none';
+        }
+
+        function enviarPedido(event) {
+            event.preventDefault();
+            document.getElementById('formEncargo').style.display = 'none';
+            document.getElementById('mensajeConfirmacion').style.display = 'block';
+            
+            setTimeout(function() {
+                cerrarEncargo();
+            }, 3000);
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('modalEncargo');
+            if (event.target == modal) {
+                cerrarEncargo();
+            }
+        }
+    </script>
+
+</body>
+</html>
